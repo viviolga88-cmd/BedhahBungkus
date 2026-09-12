@@ -1,0 +1,867 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bedhah Bungkus: Petualangan Bratasena</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@600;700;900&family=Plus+Jakarta+Sans:wght@400;600;700&display=swap" rel="stylesheet">
+    
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        jawa: {
+                            dark: '#1c100b',
+                            wood: '#3a2013',
+                            lightwood: '#5c3520',
+                            parchment: '#faf5e8',
+                            parchmentDark: '#eedfbe',
+                            gold: '#d4af37',
+                            goldLight: '#f3e5ab',
+                            red: '#7a1c1c',
+                            green: '#1e4d2b'
+                        }
+                    },
+                    fontFamily: {
+                        cinzel: ['Cinzel', 'serif'],
+                        sans: ['Plus Jakarta Sans', 'sans-serif'],
+                    }
+                }
+            }
+        }
+    </script>
+
+    <style>
+        body {
+            background-color: #1c100b;
+            background-image: radial-gradient(#3a2013 1px, transparent 1px);
+            background-size: 24px 24px;
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            color: #1c100b;
+        }
+
+        .parchment-card {
+            background-color: #faf5e8;
+            background-image: radial-gradient(#eedfbe 1px, transparent 1px);
+            background-size: 12px 12px;
+            border: 3px solid #3a2013;
+            box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.5), inset 0 0 15px rgba(58, 32, 19, 0.15);
+        }
+
+        .ethnic-border {
+            border: 2px solid #d4af37;
+            box-shadow: 0 0 12px rgba(212, 175, 55, 0.25);
+        }
+
+        .btn-jawa {
+            background: linear-gradient(180deg, #5c3520 0%, #3a2013 100%);
+            color: #f3e5ab;
+            border: 2px solid #d4af37;
+            text-shadow: 0 1px 2px rgba(0,0,0,0.8);
+            transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .btn-jawa:hover {
+            background: linear-gradient(180deg, #7a1c1c 0%, #5c3520 100%);
+            transform: translateY(-2px);
+            box-shadow: 0 6px 15px rgba(212, 175, 55, 0.4);
+        }
+
+        .btn-option {
+            background-color: #faf5e8;
+            border: 2px solid #5c3520;
+            color: #1c100b;
+            transition: all 0.2s ease;
+        }
+
+        .btn-option:hover {
+            background-color: #eedfbe;
+            border-color: #d4af37;
+            transform: translateX(4px);
+            box-shadow: 0 4px 8px rgba(0,0,0,0.15);
+        }
+
+        .glow-gold {
+            text-shadow: 0 0 10px rgba(212, 175, 55, 0.7);
+        }
+
+        /* Modal Blur */
+        .modal-backdrop {
+            background-color: rgba(15, 8, 4, 0.85);
+            backdrop-filter: blur(4px);
+        }
+    </style>
+</head>
+<body class="min-h-screen flex flex-col justify-between p-2 sm:p-4 md:p-6">
+
+    <!-- HEADER / NAVBAR -->
+    <header class="max-w-5xl mx-auto w-full mb-4 flex justify-between items-center bg-jawa-wood p-3 sm:p-4 rounded-xl border-2 border-jawa-gold shadow-lg">
+        <div class="flex items-center space-x-3">
+            <div class="w-10 h-10 rounded-full bg-jawa-gold flex items-center justify-center text-jawa-dark font-bold font-cinzel text-xl shadow-inner">
+                ꦧ
+            </div>
+            <div>
+                <h1 class="font-cinzel text-lg sm:text-2xl font-bold text-jawa-goldLight leading-tight">BEDHAH BUNGKUS</h1>
+                <p class="text-xs text-amber-200/80 hidden sm:block">Petualangan Bratasena • Bahasa Jawa SMP Kelas 8</p>
+            </div>
+        </div>
+        <button id="soundToggleBtn" onclick="toggleAudio()" class="px-3 py-1.5 rounded-lg bg-jawa-lightwood border border-jawa-gold text-jawa-goldLight text-xs sm:text-sm font-semibold flex items-center gap-2 hover:bg-jawa-red transition">
+            <span id="soundIcon">🔊</span> <span id="soundText" class="hidden sm:inline">Suara: ON</span>
+        </button>
+    </header>
+
+    <!-- MAIN CONTENT CONTAINER -->
+    <main class="max-w-5xl mx-auto w-full flex-1 flex flex-col justify-center">
+
+        <!-- ================= SCREEN 1: WELCOME SCREEN ================= -->
+        <section id="start-screen" class="parchment-card p-6 sm:p-10 rounded-2xl text-center relative overflow-hidden">
+            <div class="max-w-2xl mx-auto space-y-6">
+                <div class="inline-block px-4 py-1 rounded-full bg-jawa-wood text-jawa-gold text-xs font-semibold tracking-wider border border-jawa-gold mb-2">
+                    MEDIA PEMBELAJARAN INTERAKTIF
+                </div>
+                <h2 class="font-cinzel text-3xl sm:text-5xl font-extrabold text-jawa-wood leading-tight">
+                    Bedhah Bungkus<br><span class="text-jawa-red font-normal text-2xl sm:text-3xl">Petualangan Bratasena</span>
+                </h2>
+                
+                <p class="text-base sm:text-lg text-jawa-dark leading-relaxed">
+                    Sugeng priyagung! Raden Bratasena nalika lair awujud <span class="font-bold text-jawa-red">bungkus</span> lan wis 12 taun ora bisa disuwek nganggo gegaman apa wae. Ayo banting pinter lan mbantu <span class="font-bold text-jawa-wood">Gajah Sena</span> mbedhah bungkus kanthi mangsuli pitakon cerita wayang!
+                </p>
+
+                <!-- Topik Pembelajaran Badges -->
+                <div class="grid grid-cols-2 sm:grid-cols-4 gap-2 pt-2 text-xs font-semibold">
+                    <div class="p-2 rounded bg-jawa-parchmentDark border border-jawa-lightwood">📖 Alur Cerita</div>
+                    <div class="p-2 rounded bg-jawa-parchmentDark border border-jawa-lightwood">🎭 Karakter Tokoh</div>
+                    <div class="p-2 rounded bg-jawa-parchmentDark border border-jawa-lightwood">💡 Pitutur Luhur</div>
+                    <div class="p-2 rounded bg-jawa-parchmentDark border border-jawa-lightwood">📜 Tembung Angel</div>
+                </div>
+
+                <div class="pt-6">
+                    <button onclick="startGame()" class="btn-jawa font-cinzel text-lg sm:text-xl px-8 py-4 rounded-xl font-bold shadow-xl w-full sm:w-auto">
+                        ⚡ Mulai Petualangan
+                    </button>
+                </div>
+            </div>
+        </section>
+
+        <!-- ================= SCREEN 2: GAMEPLAY SCREEN ================= -->
+        <section id="game-screen" class="hidden space-y-4">
+            
+            <!-- TOP BAR STATUS -->
+            <div class="bg-jawa-wood p-3 sm:p-4 rounded-xl border border-jawa-gold text-jawa-parchment flex flex-wrap justify-between items-center gap-2 shadow-md">
+                <div class="flex items-center gap-2">
+                    <span class="text-xs sm:text-sm font-semibold text-amber-300">Kemajuan Soal:</span>
+                    <span id="questionProgress" class="font-bold font-cinzel text-jawa-gold text-sm sm:text-base">1 / 7</span>
+                </div>
+                <!-- Indikator Retak Bungkus -->
+                <div class="flex-1 max-w-xs mx-2">
+                    <div class="flex justify-between text-xs text-amber-200 mb-1">
+                        <span>Dayaning Bungkus</span>
+                        <span id="crackPercentText">0% Retak</span>
+                    </div>
+                    <div class="w-full h-3 bg-jawa-dark rounded-full overflow-hidden border border-jawa-gold">
+                        <div id="crackProgressBar" class="h-full bg-gradient-to-r from-amber-600 via-amber-400 to-yellow-300 transition-all duration-500 w-0"></div>
+                    </div>
+                </div>
+                <div class="flex items-center gap-2">
+                    <span class="text-xs sm:text-sm font-semibold text-amber-300">Skor:</span>
+                    <span id="scoreDisplay" class="font-bold font-cinzel text-jawa-gold text-lg">0</span>
+                </div>
+            </div>
+
+            <div class="grid grid-cols-1 lg:grid-cols-12 gap-4">
+                
+                <!-- KIRI: CANVAS ANIMASI & CERITA PENGANTAR (5 COLS) -->
+                <div class="lg:col-span-5 flex flex-col space-y-4">
+                    <!-- Canvas Canvas Visual Bungkus -->
+                    <div class="parchment-card p-2 rounded-xl relative flex flex-col items-center justify-center min-h-[260px] overflow-hidden">
+                        <canvas id="gameCanvas" class="w-full h-[240px] rounded-lg"></canvas>
+                    </div>
+
+                    <!-- Story Card Pengantar -->
+                    <div class="parchment-card p-4 rounded-xl flex-1 flex flex-col justify-center">
+                        <div class="flex items-center gap-2 mb-2">
+                            <span class="text-xl">📜</span>
+                            <h3 class="font-cinzel font-bold text-jawa-wood text-sm sm:text-base">Pengantar Cerita</h3>
+                        </div>
+                        <p id="storyText" class="text-xs sm:text-sm text-jawa-dark italic leading-relaxed">
+                            -- Pengantar cerita bakal muncul ing kene --
+                        </p>
+                    </div>
+                </div>
+
+                <!-- KANAN: KUIS & PILIHAN JAWABAN (7 COLS) -->
+                <div class="lg:col-span-7 flex flex-col justify-between parchment-card p-4 sm:p-6 rounded-xl">
+                    <div>
+                        <div class="inline-block px-3 py-1 rounded bg-jawa-wood text-jawa-gold text-xs font-bold mb-3">
+                            PITAKONAN <span id="currentQNum">1</span>
+                        </div>
+                        <h3 id="questionText" class="font-bold text-base sm:text-xl text-jawa-wood leading-snug mb-6">
+                            -- Teks Pitakon --
+                        </h3>
+
+                        <!-- Pilihan Jawaban -->
+                        <div id="optionsContainer" class="space-y-3">
+                            <!-- Button pilihan akan di-generate via JS -->
+                        </div>
+                    </div>
+
+                    <div class="mt-6 pt-4 border-t border-jawa-wood/20 text-xs text-jawa-lightwood text-center italic">
+                        *Pilih jawaban kang paling bener kanggo mbantu Gajah Sena mbedhah bungkus!
+                    </div>
+                </div>
+
+            </div>
+        </section>
+
+        <!-- ================= SCREEN 3: END SCREEN / RESULT ================= -->
+        <section id="end-screen" class="hidden parchment-card p-6 sm:p-10 rounded-2xl space-y-8 text-center">
+            
+            <div class="space-y-2">
+                <div class="inline-block px-4 py-1 rounded-full bg-jawa-wood text-jawa-gold text-xs font-bold border border-jawa-gold">
+                    PETAULANGAN RAMPUNG!
+                </div>
+                <h2 class="font-cinzel text-3xl sm:text-5xl font-extrabold text-jawa-wood">
+                    Bungkus Wus Bedhah!
+                </h2>
+                <p class="text-sm sm:text-base text-jawa-dark">
+                    Raden Bratasena wus lair dadi satriya kang gagah sakti mandraguna.
+                </p>
+            </div>
+
+            <!-- Score & Badge Box -->
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 max-w-2xl mx-auto">
+                <div class="bg-jawa-wood p-6 rounded-xl border-2 border-jawa-gold text-jawa-parchment flex flex-col justify-center items-center">
+                    <span class="text-xs text-amber-300 font-semibold mb-1">TOTAL SKOR</span>
+                    <span id="finalScore" class="font-cinzel text-5xl font-black text-jawa-gold">0</span>
+                    <span id="accuracyText" class="text-xs text-amber-200 mt-2">Jawaban Bener: 0 / 7</span>
+                </div>
+                
+                <div class="bg-jawa-parchmentDark p-6 rounded-xl border-2 border-jawa-wood flex flex-col justify-center items-center">
+                    <span class="text-xs text-jawa-lightwood font-bold mb-1">GELAR SATRIYA</span>
+                    <span id="rankBadge" class="font-cinzel text-2xl font-bold text-jawa-red my-1">Satria Utama</span>
+                    <p id="rankDesc" class="text-xs text-jawa-dark leading-tight mt-1">
+                        Paham sanget marang cerita Wayang Bima Bungkus!
+                    </p>
+                </div>
+            </div>
+
+            <!-- PITUTUR LUHUR (PESAN MORAL) CARD -->
+            <div class="max-w-2xl mx-auto bg-amber-100/80 border-2 border-jawa-gold p-5 rounded-xl text-left space-y-2 shadow-inner">
+                <div class="flex items-center gap-2 text-jawa-red font-cinzel font-bold text-lg">
+                    <span>💡</span>
+                    <h3>Pitutur Luhur (Pesan Moral Cerita)</h3>
+                </div>
+                <ul class="text-xs sm:text-sm text-jawa-dark space-y-2 list-disc list-inside leading-relaxed">
+                    <li><strong class="text-jawa-wood">Sabar lan Prihatin:</strong> Sadurunge nggayuh kamulyan lan cita-cita, manungsa kudu gelem prihatin lan sabar ngadhepi tantangan urip.</li>
+                    <li><strong class="text-jawa-wood">Saling Pitulungan:</strong> Manunggalipun Gajah Sena lan Bima mulangake pentinge gotong royong lan pitulungan ing kabecikan.</li>
+                    <li><strong class="text-jawa-wood">Amanah Dewa:</strong> Kasekten (Kuku Pancanaka) kang diduweni kudu digunakake kanggo mbela kabeneran lan nyirnakake kebathilan.</li>
+                </ul>
+            </div>
+
+            <!-- RINGKASAN TEMBUNG ANGEL (GLOSARIUM) -->
+            <div class="max-w-2xl mx-auto text-left">
+                <h4 class="font-cinzel font-bold text-jawa-wood text-sm mb-2">📜 Ringkasan Tembung Angel (Kosakata):</h4>
+                <div id="glosariumList" class="grid grid-cols-1 sm:grid-cols-2 gap-2 text-xs">
+                    <!-- Dynamic glossary list -->
+                </div>
+            </div>
+
+            <div>
+                <button onclick="startGame()" class="btn-jawa font-cinzel text-lg px-8 py-3 rounded-xl font-bold shadow-lg">
+                    🔄 Main Maneh
+                </button>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- FOOTER -->
+    <footer class="max-w-5xl mx-auto w-full mt-6 text-center text-xs text-amber-200/60 py-2">
+        Media Pembelajaran Bahasa Jawa • Cerita Wayang Bima Bungkus • Kelas VIII SMP
+    </footer>
+
+    <!-- ================= MODAL FEEDBACK JAWABAN ================= -->
+    <div id="feedbackModal" class="fixed inset-0 modal-backdrop hidden flex items-center justify-center p-4 z-50">
+        <div class="parchment-card max-w-lg w-full p-6 rounded-2xl space-y-4 shadow-2xl relative border-4 border-jawa-gold">
+            <div class="flex items-center gap-3">
+                <span id="modalIcon" class="text-4xl">✨</span>
+                <div>
+                    <h3 id="modalTitle" class="font-cinzel font-bold text-xl text-jawa-wood">Jawaban Bener!</h3>
+                    <p id="modalSubtitle" class="text-xs text-jawa-lightwood">Bungkus Bima makin retak!</p>
+                </div>
+            </div>
+
+            <div class="bg-amber-100/60 p-3 rounded-lg border border-jawa-wood/20 text-xs sm:text-sm text-jawa-dark leading-relaxed">
+                <p id="modalExplanation" class="mb-2">-- Penjelasan --</p>
+                <div id="modalTembung" class="p-2 bg-jawa-parchmentDark rounded border border-jawa-gold/40 text-jawa-wood font-semibold">
+                    💡 <strong>Tembung Angel:</strong> ...
+                </div>
+            </div>
+
+            <button onclick="nextQuestion()" class="btn-jawa font-cinzel w-full py-3 rounded-xl font-bold text-center">
+                Lanjut Soal Sabanjure ➔
+            </button>
+        </div>
+    </div>
+
+    <!-- ================= JAVASCRIPT LOGIC ================= -->
+    <script>
+        /* ================= 1. AUDIO SYNTHESIZER (WEB AUDIO API) ================= */
+        class SoundEngine {
+            constructor() {
+                this.ctx = null;
+                this.enabled = true;
+            }
+
+            init() {
+                if (!this.ctx) {
+                    const AudioCtx = window.AudioContext || window.webkitAudioContext;
+                    this.ctx = new AudioCtx();
+                }
+                if (this.ctx.state === 'suspended') {
+                    this.ctx.resume();
+                }
+            }
+
+            playClick() {
+                if (!this.enabled) return;
+                this.init();
+                const osc = this.ctx.createOscillator();
+                const gain = this.ctx.createGain();
+                osc.type = 'sine';
+                osc.frequency.setValueAtTime(500, this.ctx.currentTime);
+                osc.frequency.exponentialRampToValueAtTime(800, this.ctx.currentTime + 0.04);
+                gain.gain.setValueAtTime(0.15, this.ctx.currentTime);
+                gain.gain.linearRampToValueAtTime(0.01, this.ctx.currentTime + 0.04);
+                osc.connect(gain);
+                gain.connect(this.ctx.destination);
+                osc.start();
+                osc.stop(this.ctx.currentTime + 0.04);
+            }
+
+            playCorrect() {
+                if (!this.enabled) return;
+                this.init();
+                const now = this.ctx.currentTime;
+                const notes = [523.25, 659.25, 783.99, 1046.50]; // C5, E5, G5, C6
+                notes.forEach((freq, i) => {
+                    const osc = this.ctx.createOscillator();
+                    const gain = this.ctx.createGain();
+                    osc.type = 'triangle';
+                    osc.frequency.setValueAtTime(freq, now + i * 0.07);
+                    gain.gain.setValueAtTime(0, now + i * 0.07);
+                    gain.gain.linearRampToValueAtTime(0.2, now + i * 0.07 + 0.02);
+                    gain.gain.exponentialRampToValueAtTime(0.001, now + i * 0.07 + 0.25);
+                    osc.connect(gain);
+                    gain.connect(this.ctx.destination);
+                    osc.start(now + i * 0.07);
+                    osc.stop(now + i * 0.07 + 0.25);
+                });
+            }
+
+            playWrong() {
+                if (!this.enabled) return;
+                this.init();
+                const now = this.ctx.currentTime;
+                const osc = this.ctx.createOscillator();
+                const gain = this.ctx.createGain();
+                osc.type = 'sawtooth';
+                osc.frequency.setValueAtTime(180, now);
+                osc.frequency.linearRampToValueAtTime(110, now + 0.25);
+                gain.gain.setValueAtTime(0.2, now);
+                gain.gain.linearRampToValueAtTime(0.01, now + 0.25);
+                osc.connect(gain);
+                gain.connect(this.ctx.destination);
+                osc.start(now);
+                osc.stop(now + 0.25);
+            }
+
+            playVictory() {
+                if (!this.enabled) return;
+                this.init();
+                const now = this.ctx.currentTime;
+                // Pentatonic Fanfare
+                const notes = [
+                    { f: 523.25, t: 0, d: 0.15 },
+                    { f: 587.33, t: 0.12, d: 0.15 },
+                    { f: 659.25, t: 0.24, d: 0.15 },
+                    { f: 783.99, t: 0.36, d: 0.2 },
+                    { f: 880.00, t: 0.52, d: 0.2 },
+                    { f: 1046.50, t: 0.70, d: 0.5 }
+                ];
+                notes.forEach(note => {
+                    const osc = this.ctx.createOscillator();
+                    const gain = this.ctx.createGain();
+                    osc.type = 'sine';
+                    osc.frequency.setValueAtTime(note.f, now + note.t);
+                    gain.gain.setValueAtTime(0, now + note.t);
+                    gain.gain.linearRampToValueAtTime(0.25, now + note.t + 0.02);
+                    gain.gain.exponentialRampToValueAtTime(0.001, now + note.t + note.d);
+                    osc.connect(gain);
+                    gain.connect(this.ctx.destination);
+                    osc.start(now + note.t);
+                    osc.stop(now + note.t + note.d);
+                });
+            }
+        }
+
+        const soundFX = new SoundEngine();
+
+        function toggleAudio() {
+            soundFX.enabled = !soundFX.enabled;
+            document.getElementById('soundIcon').innerText = soundFX.enabled ? '🔊' : '🔇';
+            document.getElementById('soundText').innerText = soundFX.enabled ? 'Suara: ON' : 'Suara: OFF';
+            if (soundFX.enabled) soundFX.playClick();
+        }
+
+
+        /* ================= 2. DATA MATERI & KUIS ================= */
+        const quizData = [
+            {
+                story: "Raden Bratasena nalika lair awujud bungkus. Ora ana gegaman apa wae sing bisa nyuwek bungkus kasebut. Prabu Pandu Dewanata lan Dewi Kunti banget anggone prihatin lan nyuwun pitulungan marang Dewa.",
+                question: "Pira suwene Bima wujud bungkus manggon ing Alas Mandalasara nganti ndadekake prihatine ingkang rama Prabu Pandu?",
+                options: ["12 Taun", "10 Taun", "7 Taun", "5 Taun"],
+                correct: 0,
+                explanation: "Bungkus Bima ora bisa kabuka sajrone 12 taun suwene, njalari kuwatire Prabu Pandu lan Kunti sakulawarga.",
+                tembungAngel: "Gegaman = Senjata / Piranti kanggo perang."
+            },
+            {
+                story: "Amarga manungsa ora ana sing mampu nyuwek bungkus kasebut, Batara Guru ngutus satriya saka kahyangan kang awujud gajah kanggo mbedhah bungkus ing alas.",
+                question: "Sapa tokoh wujud gajah kang diutus dening Batara Guru kanggo mbedhah bungkus Bima?",
+                options: ["Gajah Sena", "Gajah Mada", "Gajah Hastina", "Batara Ganesha"],
+                correct: 0,
+                explanation: "Gajah Sena yaiku putra saka Batara Bayu sing diutus dening Batara Guru kanggo nyuwek lan mbedhah bungkus Bima.",
+                tembungAngel: "Diutus = Diprintah / Dikon nindakake tugas."
+            },
+            {
+                story: "Nalika bungkus disimpen ing alas, pangeran saka Ngastina kang rasa atine iri lan kuwatir yen Bima dadi satriya kang ampuh usaha ngrusak bungkus kasebut.",
+                question: "Sapa sing nyoba ngrusak bungkus Bima amarga rasa meri lan wedi marang kasektene Bima?",
+                options: ["Para Kurawa lan Patih Sangkuni", "Para Pandawa", "Dewa Anoman", "Para Resi Kahyangan"],
+                correct: 0,
+                explanation: "Para Kurawa sing dipimpin Patih Sangkuni tansah meri lan kuwatir yen Bima dadi punjer kasekten Pandawa.",
+                tembungAngel: "Meri / Iri = Rasa ora seneng ndeleng wong liya oleh kabagyan."
+            },
+            {
+                story: "Sawise Gajah Sena teka ing alas, panjenengane nggunakake taring lan gadinge. Tembung ing cerita puitis: 'Sawise bungkus kaprakat, kabeh pacoban pungkasanipun sirna.'",
+                question: "Apa tegese tembung 'sirna' sajrone cerita wayang Bima Bungkus?",
+                options: ["Ilang / Musna", "Ketok / Cetha", "Tambah Dhuwur", "Mulai Lair"],
+                correct: 0,
+                explanation: "Tembung 'sirna' tegese ilang, musna, utawa rusuh.",
+                tembungAngel: "Sirna = Ilang / Musna; Pacoban = Ujian urip."
+            },
+            {
+                story: "Gajah Sena nggunakake taringe lan kasektene kanthi penuh daya. Sawise bungkus Bima kasil kabukak, ana kedadeyan ajaib sing dumadi marang Gajah Sena.",
+                question: "Apa sing dumadi marang Gajah Sena sawise kasil mbedhah bungkus Bima?",
+                options: ["Sirna lan ruhe manunggal ing ragane Bima", "Bali menyang kahyangan kanthi slamet", "Dadi raja ing Negara Ngastina", "Mlayu menyang tengah alas amarga wedi"],
+                correct: 0,
+                explanation: "Gajah Sena seda/sirna lan sukmane manunggal mlebu ing raga Bima, menehi kekuatan kang ngedab-edabi.",
+                tembungAngel: "Manunggal = Dadi siji / Nyawiji."
+            },
+            {
+                story: "Sawise jabang bayi metu saka bungkus lan manunggal karo roh Gajah Sena, Bima keparingan senjata pusaka alami ing tangane.",
+                question: "Apa jenenge kuku ampuh lan landhep ing jempolan tangane Bima kang dadi pusaka utamane?",
+                options: ["Kuku Pancanaka", "Panah Pasopati", "Gada Rujakpala", "Keris Mpu Gandring"],
+                correct: 0,
+                explanation: "Bima keparingan pusaka alami wujud kuku landhep ing jempolane kang dijenengi Kuku Pancanaka.",
+                tembungAngel: "Landhep = Tajam; Pusaka = Senjata warisan kasekten."
+            },
+            {
+                story: "Cerita Wayang Bima Bungkus nduweni nilai piwulang lan budi pekerti kang adhiluhung kanggo pengajaran para siswa SMP.",
+                question: "Apa pitutur luhur (pesan moral) utama kang bisa kajupuk saka cerita Bima Bungkus?",
+                options: [
+                    "Kudu sabar, tabah, lan prihatin ngadhepi pacoban sadurunge nggayuh kemuliaan",
+                    "Kudu nggunakake kekerasan kanggo ngrampungi kabeh masalah",
+                    "Nyingkiri kabeh gawean abot lan pasrah tanpa usaha",
+                    "Menang dhewe lan ora butuh pitulungan saka wong liya"
+                ],
+                correct: 0,
+                explanation: "Poin utama cerita Bima Bungkus yaiku manungsa kudu gelem prihatin, sabar, lan mantep marang Gusti nalika ngadhepi tantangan urip.",
+                tembungAngel: "Pitutur Luhur = Piwulang moral / Ajaran kabecikan."
+            }
+        ];
+
+        /* ================= 3. GAME STATE MANAGEMENT ================= */
+        let currentQuestions = [];
+        let currentIndex = 0;
+        let score = 0;
+        let correctAnswersCount = 0;
+        let crackPercent = 0;
+        let targetCrackPercent = 0;
+
+        function shuffleQuestions() {
+            // Clone & Shuffle questions & choices
+            currentQuestions = quizData.map(q => {
+                const optionsObj = q.options.map((opt, idx) => ({ text: opt, isCorrect: idx === q.correct }));
+                // Shuffle choices
+                for (let i = optionsObj.length - 1; i > 0; i--) {
+                    const j = Math.floor(Math.random() * (i + 1));
+                    [optionsObj[i], optionsObj[j]] = [optionsObj[j], optionsObj[i]];
+                }
+                return {
+                    ...q,
+                    shuffledOptions: optionsObj
+                };
+            });
+        }
+
+        function startGame() {
+            soundFX.playClick();
+            shuffleQuestions();
+            currentIndex = 0;
+            score = 0;
+            correctAnswersCount = 0;
+            crackPercent = 0;
+            targetCrackPercent = 0;
+
+            document.getElementById('start-screen').classList.add('hidden');
+            document.getElementById('end-screen').classList.add('hidden');
+            document.getElementById('game-screen').classList.remove('hidden');
+
+            resizeCanvas();
+            loadQuestion();
+        }
+
+        function loadQuestion() {
+            const q = currentQuestions[currentIndex];
+            document.getElementById('questionProgress').innerText = `${currentIndex + 1} / ${currentQuestions.length}`;
+            document.getElementById('currentQNum').innerText = `${currentIndex + 1}`;
+            document.getElementById('scoreDisplay').innerText = score;
+            document.getElementById('storyText').innerText = `"${q.story}"`;
+            document.getElementById('questionText').innerText = q.question;
+
+            const container = document.getElementById('optionsContainer');
+            container.innerHTML = '';
+
+            const prefixes = ['A', 'B', 'C', 'D'];
+            q.shuffledOptions.forEach((opt, idx) => {
+                const btn = document.createElement('button');
+                btn.className = 'btn-option w-full p-3 sm:p-4 rounded-xl text-left font-semibold flex items-center gap-3 shadow-sm';
+                btn.onclick = () => handleAnswer(opt, btn);
+                btn.innerHTML = `
+                    <span class="w-8 h-8 rounded-lg bg-jawa-wood text-jawa-gold flex items-center justify-center font-cinzel font-bold text-sm border border-jawa-gold shrink-0">
+                        ${prefixes[idx]}
+                    </span>
+                    <span class="text-xs sm:text-sm text-jawa-dark">${opt.text}</span>
+                `;
+                container.appendChild(btn);
+            });
+        }
+
+        function handleAnswer(selectedOpt, btnElement) {
+            soundFX.playClick();
+            
+            // Disable all option buttons
+            const buttons = document.querySelectorAll('#optionsContainer button');
+            buttons.forEach(b => b.disabled = true);
+
+            const q = currentQuestions[currentIndex];
+            const isCorrect = selectedOpt.isCorrect;
+
+            const modal = document.getElementById('feedbackModal');
+            const modalTitle = document.getElementById('modalTitle');
+            const modalSubtitle = document.getElementById('modalSubtitle');
+            const modalIcon = document.getElementById('modalIcon');
+            const modalExp = document.getElementById('modalExplanation');
+            const modalTembung = document.getElementById('modalTembung');
+
+            if (isCorrect) {
+                soundFX.playCorrect();
+                score += 15;
+                correctAnswersCount++;
+                targetCrackPercent = Math.min(100, targetCrackPercent + (100 / currentQuestions.length));
+                
+                modalIcon.innerText = "⚡";
+                modalTitle.innerText = "Jawaban Bener!";
+                modalTitle.className = "font-cinzel font-bold text-xl text-jawa-green";
+                modalSubtitle.innerText = "Bungkus Bima saya retak lan meh pecah!";
+                
+                btnElement.classList.add('bg-green-100', 'border-green-600');
+            } else {
+                soundFX.playWrong();
+                modalIcon.innerText = "❌";
+                modalTitle.innerText = "Kurang Tepat!";
+                modalTitle.className = "font-cinzel font-bold text-xl text-jawa-red";
+                modalSubtitle.innerText = "Tetep semangat, sinaoni katerangane ing ngisor!";
+                
+                btnElement.classList.add('bg-red-100', 'border-red-600');
+            }
+
+            // Update Crack Progress UI Text
+            document.getElementById('crackPercentText').innerText = `${Math.round(targetCrackPercent)}% Retak`;
+            document.getElementById('crackProgressBar').style.width = `${targetCrackPercent}%`;
+            document.getElementById('scoreDisplay').innerText = score;
+
+            modalExp.innerText = q.explanation;
+            modalTembung.innerHTML = `💡 <strong>Tembung Angel:</strong> ${q.tembungAngel}`;
+
+            setTimeout(() => {
+                modal.classList.remove('hidden');
+            }, 400);
+        }
+
+        function nextQuestion() {
+            soundFX.playClick();
+            document.getElementById('feedbackModal').classList.add('hidden');
+            currentIndex++;
+
+            if (currentIndex < currentQuestions.length) {
+                loadQuestion();
+            } else {
+                showEndScreen();
+            }
+        }
+
+        function showEndScreen() {
+            document.getElementById('game-screen').classList.add('hidden');
+            document.getElementById('end-screen').classList.remove('hidden');
+
+            // Set final crack percentage to 100% for glorious ending if passed
+            if (correctAnswersCount >= 4) {
+                targetCrackPercent = 100;
+            }
+
+            soundFX.playVictory();
+
+            const finalScoreVal = score;
+            document.getElementById('finalScore').innerText = finalScoreVal;
+            document.getElementById('accuracyText').innerText = `Jawaban Bener: ${correctAnswersCount} saka ${currentQuestions.length}`;
+
+            // Rank Badge Calculation
+            const rankBadge = document.getElementById('rankBadge');
+            const rankDesc = document.getElementById('rankDesc');
+
+            if (finalScoreVal >= 90) {
+                rankBadge.innerText = "Satria Tama Bratasena";
+                rankDesc.innerText = "Luar biasa! Sampeyan paham sanget marang alur cerita, tokoh, lan pitutur luhur Bima Bungkus!";
+            } else if (finalScoreVal >= 60) {
+                rankBadge.innerText = "Prajurit Mahir Ngastina";
+                rankDesc.innerText = "Sampun apik! Wis mampu ngerteni cerita lan tembung angel kanthi becik.";
+            } else {
+                rankBadge.innerText = "Satriya Magang";
+                rankDesc.innerText = "Ayo sinau maneh cerita Bima Bungkus supaya luwih paham babagan pewayangan Jawa!";
+            }
+
+            // Populate Glosarium List
+            const glosariumContainer = document.getElementById('glosariumList');
+            glosariumContainer.innerHTML = '';
+            quizData.forEach(q => {
+                const item = document.createElement('div');
+                item.className = 'p-2 bg-jawa-parchmentDark rounded border border-jawa-wood/20';
+                item.innerHTML = `📌 <strong>${q.tembungAngel}</strong>`;
+                glosariumContainer.appendChild(item);
+            });
+        }
+
+
+        /* ================= 4. CANVAS GRAPHICS & ANIMATION ENGINE ================= */
+        const canvas = document.getElementById('gameCanvas');
+        const ctx = canvas.getContext('2d');
+
+        function resizeCanvas() {
+            if (!canvas.parentElement) return;
+            const rect = canvas.parentElement.getBoundingClientRect();
+            canvas.width = rect.width;
+            canvas.height = 240;
+        }
+        window.addEventListener('resize', resizeCanvas);
+
+        // Particle background
+        const particles = Array.from({ length: 30 }, () => ({
+            x: Math.random() * 400,
+            y: Math.random() * 240,
+            r: Math.random() * 2 + 1,
+            speedY: Math.random() * 0.6 + 0.2,
+            opacity: Math.random() * 0.7 + 0.3
+        }));
+
+        // Crack Paths relative to center
+        const crackPaths = [
+            [{x: 0, y: -60}, {x: -12, y: -35}, {x: -8, y: -15}, {x: -25, y: 10}, {x: -15, y: 35}],
+            [{x: 0, y: -60}, {x: 15, y: -40}, {x: 10, y: -20}, {x: 28, y: 0}, {x: 20, y: 40}],
+            [{x: -45, y: -10}, {x: -25, y: 0}, {x: -8, y: -15}],
+            [{x: 45, y: 10}, {x: 25, y: 0}, {x: 10, y: -20}],
+            [{x: -15, y: 35}, {x: 0, y: 55}, {x: 15, y: 35}],
+            [{x: -30, y: -30}, {x: -15, y: -20}, {x: 0, y: -60}],
+            [{x: 30, y: -30}, {x: 15, y: -20}]
+        ];
+
+        function drawCanvasScene() {
+            // Smoothly animate crack percentage
+            if (crackPercent < targetCrackPercent) {
+                crackPercent = Math.min(targetCrackPercent, crackPercent + 0.8);
+            }
+
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+            const cx = canvas.width / 2;
+            const cy = canvas.height / 2;
+            const pulse = Math.sin(Date.now() * 0.004) * 4;
+
+            // 1. Forest Mystic Background
+            const bgGrad = ctx.createRadialGradient(cx, cy, 20, cx, cy, canvas.width / 1.2);
+            bgGrad.addColorStop(0, '#3a2013');
+            bgGrad.addColorStop(0.7, '#1c100b');
+            bgGrad.addColorStop(1, '#0f0804');
+            ctx.fillStyle = bgGrad;
+            ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+            // 2. Floating Sparks Particles
+            particles.forEach(p => {
+                p.y -= p.speedY;
+                if (p.y < 0) {
+                    p.y = canvas.height;
+                    p.x = Math.random() * canvas.width;
+                }
+                ctx.beginPath();
+                ctx.arc((p.x / 400) * canvas.width, p.y, p.r, 0, Math.PI * 2);
+                ctx.fillStyle = `rgba(212, 175, 55, ${p.opacity})`;
+                ctx.shadowBlur = 6;
+                ctx.shadowColor = '#d4af37';
+                ctx.fill();
+                ctx.shadowBlur = 0;
+            });
+
+            // 3. Gajah Sena Power Aura (Left Side)
+            const gajahX = cx - 120;
+            ctx.save();
+            ctx.strokeStyle = 'rgba(212, 175, 55, 0.4)';
+            ctx.lineWidth = 2;
+            ctx.beginPath();
+            ctx.arc(gajahX, cy, 35 + pulse, 0, Math.PI * 2);
+            ctx.stroke();
+
+            // Stylized Gajah Sena Tusk / Elephant Aura
+            ctx.fillStyle = '#f3e5ab';
+            ctx.font = '11px Cinzel';
+            ctx.textAlign = 'center';
+            ctx.fillText('Gajah Sena', gajahX, cy + 50);
+
+            // Tusk graphics
+            ctx.strokeStyle = '#d4af37';
+            ctx.lineWidth = 3;
+            ctx.beginPath();
+            ctx.moveTo(gajahX - 25, cy + 15);
+            ctx.quadraticCurveTo(gajahX, cy + 10, gajahX + 35, cy - 10);
+            ctx.stroke();
+            ctx.restore();
+
+            // 4. BIMA BUNGKUS
+            ctx.save();
+
+            // Outer Glowing Aura
+            const auraGrad = ctx.createRadialGradient(cx, cy, 20, cx, cy, 80 + pulse);
+            auraGrad.addColorStop(0, 'rgba(212, 175, 55, 0.35)');
+            auraGrad.addColorStop(0.6, 'rgba(122, 28, 28, 0.2)');
+            auraGrad.addColorStop(1, 'rgba(0, 0, 0, 0)');
+            ctx.fillStyle = auraGrad;
+            ctx.beginPath();
+            ctx.ellipse(cx, cy, 60 + pulse, 75 + pulse, 0, 0, Math.PI * 2);
+            ctx.fill();
+
+            if (crackPercent >= 100) {
+                // FULLY BEDHAH! Light burst & Bratasena silhouette
+                const burstGrad = ctx.createRadialGradient(cx, cy, 10, cx, cy, 120);
+                burstGrad.addColorStop(0, '#fff8e1');
+                burstGrad.addColorStop(0.4, '#ffd700');
+                burstGrad.addColorStop(0.8, 'rgba(212, 175, 55, 0.4)');
+                burstGrad.addColorStop(1, 'rgba(0,0,0,0)');
+                ctx.fillStyle = burstGrad;
+                ctx.beginPath();
+                ctx.arc(cx, cy, 120, 0, Math.PI * 2);
+                ctx.fill();
+
+                // Bratasena Silhouette
+                ctx.fillStyle = '#1c100b';
+                ctx.beginPath();
+                // Head
+                ctx.arc(cx, cy - 30, 14, 0, Math.PI * 2);
+                // Gelung Crown
+                ctx.moveTo(cx - 8, cy - 36);
+                ctx.quadraticCurveTo(cx - 20, cy - 55, cx, cy - 50);
+                ctx.quadraticCurveTo(cx + 20, cy - 55, cx + 8, cy - 36);
+                // Body
+                ctx.moveTo(cx - 20, cy - 12);
+                ctx.lineTo(cx + 20, cy - 12);
+                ctx.lineTo(cx + 28, cy + 25);
+                ctx.lineTo(cx - 28, cy + 25);
+                ctx.fill();
+
+                // Kuku Pancanaka Glowing Gold
+                ctx.strokeStyle = '#ffd700';
+                ctx.lineWidth = 3.5;
+                ctx.beginPath();
+                ctx.moveTo(cx + 22, cy + 5);
+                ctx.quadraticCurveTo(cx + 42, cy, cx + 45, cy - 15);
+                ctx.stroke();
+
+                ctx.fillStyle = '#ffd700';
+                ctx.font = 'bold 13px Cinzel';
+                ctx.textAlign = 'center';
+                ctx.fillText('BRATASENA LAIR!', cx, cy + 65);
+            } else {
+                // DRAW BUNGKUS OVAL
+                const bungkusGrad = ctx.createRadialGradient(cx - 15, cy - 20, 5, cx, cy, 70);
+                bungkusGrad.addColorStop(0, '#eedfbe');
+                bungkusGrad.addColorStop(0.6, '#ad8255');
+                bungkusGrad.addColorStop(1, '#3a2013');
+
+                ctx.fillStyle = bungkusGrad;
+                ctx.strokeStyle = '#1c100b';
+                ctx.lineWidth = 3;
+                ctx.beginPath();
+                ctx.ellipse(cx, cy, 50, 68, 0, 0, Math.PI * 2);
+                ctx.fill();
+                ctx.stroke();
+
+                // Bandage Wrapping Lines
+                ctx.strokeStyle = 'rgba(58, 32, 19, 0.4)';
+                ctx.lineWidth = 2;
+                for (let i = -45; i <= 45; i += 18) {
+                    ctx.beginPath();
+                    ctx.moveTo(cx - 40, cy + i);
+                    ctx.quadraticCurveTo(cx, cy + i - 10, cx + 40, cy + i);
+                    ctx.stroke();
+                }
+
+                // DRAW CRACKS
+                const cracksToDraw = Math.floor((crackPercent / 100) * crackPaths.length);
+                ctx.strokeStyle = '#ffd700';
+                ctx.shadowColor = '#ff8c00';
+                ctx.shadowBlur = 8;
+                ctx.lineWidth = 2.5;
+
+                for (let i = 0; i < cracksToDraw; i++) {
+                    const path = crackPaths[i];
+                    ctx.beginPath();
+                    ctx.moveTo(cx + path[0].x, cy + path[0].y);
+                    for (let j = 1; j < path.length; j++) {
+                        ctx.lineTo(cx + path[j].x, cy + path[j].y);
+                    }
+                    ctx.stroke();
+                }
+                ctx.shadowBlur = 0;
+
+                // Label status canvas
+                ctx.fillStyle = '#f3e5ab';
+                ctx.font = '11px Plus Jakarta Sans';
+                ctx.textAlign = 'center';
+                ctx.fillText(`Bungkus Bima (${Math.round(crackPercent)}%)`, cx, cy + 88);
+            }
+
+            ctx.restore();
+
+            requestAnimationFrame(drawCanvasScene);
+        }
+
+        // Initialize Canvas Loop & Resize on Load
+        window.onload = () => {
+            resizeCanvas();
+            drawCanvasScene();
+        };
+    </script>
+</body>
+</html>
